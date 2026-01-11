@@ -14,7 +14,7 @@
   & .overlay {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(0, 0, 0, 0.85);
+    background-color: rgb(0,0,0,0.85);
     position: absolute;
     top: 0;
     left: 0;
@@ -24,21 +24,33 @@
   }
 
   & .popup {
+    --popup-radius: 20px;
+    --padding: 1em;
+
     width: 75vw;
     height: 75vh;
     max-width: 40em;
     
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgb(0, 0, 0, 1);
+    border-radius: var(--popup-radius);
+    box-shadow: 0 0 10px rgb(0,0,0,1);
 
-    padding: 1em;
+    padding: var(--padding);
 
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background:  white;
     z-index: 10000;
+
+    /*clip-path: path("m 0 30 L 30 0 L 49 19 L 68 0 L 98 30 L 68 60 L 49 41 L 30 60 Z m 36 20 L 47 39 L 38 30 L 47 21 L 36 10 L 16 30 Z M 51 21 L 60 30 L 51 39 L 62 50 L 82 30 L 62 10 L 51 21 Z");
+    clip-path: path("m 0 0.5 L 0.306 0 L 0.5 0.317 L 0.694 0 L 1 0.5 L 0.694 1 L 0.5 0.683 L 0.306 1 Z m 0.367 0.333 L 0.48 0.65 L 0.388 0.5 L 0.48 0.35 L 0.367 0.167 L 0.163 0.5 Z M 0.52 0.35 L 0.612 0.5 L 0.52 0.65 L 0.633 0.833 L 0.837 0.5 L 0.633 0.167 L 0.52 0.35 Z");
+    clip-path: path("m 0% 50% L 30.6% 0% L 50% 31.7% L 69.4% 0% L 100% 50% L 69.4% 100% L 50% 68.3% L 30.6% 100% Z m 36.7% 33.3% L 48% 65% L 38.8% 50% L 48% 35% L 36.7% 16.7% L 16.3% 50% Z M 52% 35% L 61.2% 50% L 52% 65% L 63.3% 83.3% L 83.7% 50% L 63.3% 16.7% L 52% 35% Z");*/
+    /* https://yqnn.github.io/svg-path-editor/#P=M_0_30_L_30_0_L_49_19_L_68_0_L_98_30_L_68_60_L_49_41_L_30_60_Z_M_36_50_L_47_39_L_38_30_L_47_21_L_36_10_L_16_30_Z_M_51_21_L_60_30_L_51_39_L_62_50_L_82_30_L_62_10_L_51_21_Z */
+
+    /* clip-path: path("M 0 41 L 30 11 L 49 30 L 79 0 L 109 30 L 128 11 L 158 41 L 128 71 L 109 52 L 79 82 L 49 52 L 30 71 Z M 36 61 L 47 50 L 38 41 L 47 32 L 36 21 L 16 41 Z M 51 32 L 60 41 L 51 50 L 79 78 L 107 50 L 98 41 L 107 32 L 79 4 L 51 32 Z M 111 50 L 122 61 L 142 41 L 122 21 L 111 32 L 120 41 L 111 50");
+    https://yqnn.github.io/svg-path-editor/#P=M_0_41_L_30_11_L_49_30_L_79_0_L_109_30_L_128_11_L_158_41_L_128_71_L_109_52_L_79_82_L_49_52_L_30_71_Z_M_36_61_L_47_50_L_38_41_L_47_32_L_36_21_L_16_41_Z_M_51_32_L_60_41_L_51_50_L_79_78_L_107_50_L_98_41_L_107_32_L_79_4_L_51_32_Z_M_111_50_L_122_61_L_142_41_L_122_21_L_111_32_L_120_41_L_111_50
+    */
 
       & h1 {
         width: 100%;
@@ -49,31 +61,69 @@
         margin-bottom: 0px;
       }
 
-      & p {
-        /*background: #F7EECF url(../public/images/ui-background/settings.png) no-repeat 0 0 scroll;
-        background-size: auto 14px;*/
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        background-color: rgb(0,0,0,0.9);
-        border-radius: 5px;
-        color: whitesmoke;
+      & .section-wrapper {
+        --section-radius: 5px;
 
-        padding: 1em;
-
-        min-height: 2em;
+        display: block;
+        margin: 0px;
+        width: 100%;
+        /*height: fit-content;*/
+        min-height: calc(var(--padding) * 2);
         align-content: center;
 
-        & :before {
-          display: block;
-          position: absolute;
-          width: calc(100%-6px);
-          height: calc(100%-6px);
-          border: 3px solid rgb(106,101,74, 0.9);
-          background-color: transparent;
-          border-radius: 5px;
+        & .section {
+          /*background: #F7EECF url(../public/images/ui-background/settings.png) no-repeat 0 0 scroll;
+          background-size: auto 14px;*/
+          /*box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;*/
+          display: inline-block;
+          padding: var(--padding);
+          max-height: 100%;
+          width: 100%;
+          position: relative;
+
+          background-color: rgb(8,8,8,0.9);
+          border-radius: var(--section-radius);
+          color: white;
+
+          box-shadow:
+          inset 0 0 0 2px rgb(8,8,8,0.8),
+          inset 0 0 0 4px rgb(106,101,74, 0.5);
         }
+
+        & .section:hover::before {
+          display: block;
+          content: '';
+          box-sizing: border-box;
+
+          background-color: transparent;
+          border-radius: var(--section-radius);
+          border: 1px solid white;
+          box-shadow: inset 0 0 3px 1px rgb(255, 255, 255, 0.9), 0 0 3px 1px rgb(255, 255, 255, 0.9);
+
+          height: calc(100% - 8px);
+          width: calc(100% - 8px);
+          position: absolute;
+          top: 4px;
+          left: 4px;
+        }
+
       }
 
   }
+
+  & .popup::before {
+    content: ' ';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(225,227,224);
+    top: 0px;
+    left: 0px;
+    clip-path: path("M 0 41 L 30 11 L 49 30 L 79 0 L 109 30 L 128 11 L 158 41 L 128 71 L 109 52 L 79 82 L 49 52 L 30 71 Z M 36 61 L 47 50 L 38 41 L 47 32 L 36 21 L 16 41 Z M 51 32 L 60 41 L 51 50 L 79 78 L 107 50 L 98 41 L 107 32 L 79 4 L 51 32 Z M 111 50 L 122 61 L 142 41 L 122 21 L 111 32 L 120 41 L 111 50");
+    /*clip-path: path("m 0 30 L 30 0 L 49 19 L 68 0 L 98 30 L 68 60 L 49 41 L 30 60 Z m 36 20 L 47 39 L 38 30 L 47 21 L 36 10 L 16 30 Z M 51 21 L 60 30 L 51 39 L 62 50 L 82 30 L 62 10 L 51 21 Z");*/
+    background-size: cover;
+  }
+
 }
