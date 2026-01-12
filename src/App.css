@@ -43,6 +43,7 @@
     background:  white;
     z-index: 10000;
 
+    clip-path: url("https://raw.githubusercontent.com/srishti-lamba/FEW3H-BattleList/refs/heads/main/public/images/ui-background/two-diamonds.svg#two-diamonds");
     /*clip-path: path("m 0 30 L 30 0 L 49 19 L 68 0 L 98 30 L 68 60 L 49 41 L 30 60 Z m 36 20 L 47 39 L 38 30 L 47 21 L 36 10 L 16 30 Z M 51 21 L 60 30 L 51 39 L 62 50 L 82 30 L 62 10 L 51 21 Z");
     clip-path: path("m 0 0.5 L 0.306 0 L 0.5 0.317 L 0.694 0 L 1 0.5 L 0.694 1 L 0.5 0.683 L 0.306 1 Z m 0.367 0.333 L 0.48 0.65 L 0.388 0.5 L 0.48 0.35 L 0.367 0.167 L 0.163 0.5 Z M 0.52 0.35 L 0.612 0.5 L 0.52 0.65 L 0.633 0.833 L 0.837 0.5 L 0.633 0.167 L 0.52 0.35 Z");
     clip-path: path("m 0% 50% L 30.6% 0% L 50% 31.7% L 69.4% 0% L 100% 50% L 69.4% 100% L 50% 68.3% L 30.6% 100% Z m 36.7% 33.3% L 48% 65% L 38.8% 50% L 48% 35% L 36.7% 16.7% L 16.3% 50% Z M 52% 35% L 61.2% 50% L 52% 65% L 63.3% 83.3% L 83.7% 50% L 63.3% 16.7% L 52% 35% Z");*/
@@ -61,55 +62,98 @@
         margin-bottom: 0px;
       }
 
-      & .section-wrapper {
+      & .section {
         --section-radius: 5px;
 
-        display: block;
-        margin: 0px;
-        width: 100%;
-        /*height: fit-content;*/
-        min-height: calc(var(--padding) * 2);
+        display: flex;
+        flex-direction: row;
+
+        position: relative;
         align-content: center;
 
-        & .section {
-          /*background: #F7EECF url(../public/images/ui-background/settings.png) no-repeat 0 0 scroll;
-          background-size: auto 14px;*/
-          /*box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          -webkit-box-sizing: border-box;*/
-          display: inline-block;
-          padding: var(--padding);
-          max-height: 100%;
-          width: 100%;
-          position: relative;
+        max-height: 100%;
+        width: 100%;
 
-          background-color: rgb(8,8,8,0.9);
-          border-radius: var(--section-radius);
-          color: white;
+        padding: var(--padding);
+        margin: 0px;
 
-          box-shadow:
-          inset 0 0 0 2px rgb(8,8,8,0.8),
-          inset 0 0 0 4px rgb(106,101,74, 0.5);
+        background-color: rgb(8,8,8,1);
+        border-radius: var(--section-radius);
+        color: white;
+
+        box-shadow:
+        inset 0 0 0 2px rgb(8,8,8,1),
+        inset 0 0 0 4px rgb(106,101,74, 0.5);
+
+        & .prompt {
+          flex-basis: 40%;
         }
 
-        & .section:hover::before {
-          display: block;
-          content: '';
-          box-sizing: border-box;
+        & .buttons {
+          --button-border-radius: 4px;
 
-          background-color: transparent;
-          border-radius: var(--section-radius);
-          border: 1px solid white;
-          box-shadow: inset 0 0 3px 1px rgb(255, 255, 255, 0.9), 0 0 3px 1px rgb(255, 255, 255, 0.9);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          flex-grow: 1;
+          gap: 5px;
 
-          height: calc(100% - 8px);
-          width: calc(100% - 8px);
-          position: absolute;
-          top: 4px;
-          left: 4px;
+          & button {
+            height: fit-content;
+            border-radius: 0px;
+            border: 2px solid transparent;
+            flex-grow: 1;
+
+            background: 
+              linear-gradient(rgb(9,9,9,1) 0 0) padding-box,
+              linear-gradient(180deg, rgb(137,137,137,1), rgb(98,89,66,0.75)) border-box;
+            
+          }
+
+          & button:first-of-type {
+            border-top-left-radius: var(--button-border-radius);
+            border-bottom-left-radius: var(--button-border-radius);
+
+            background: 
+              linear-gradient(rgb(9,9,9,1) 0 0) padding-box,
+              linear-gradient(135deg, transparent, rgb(141,141,122,0.75)) border-box,
+              linear-gradient(to right, transparent, rgb(141,141,122,1), transparent, rgb(141,141,122,1)) border-box,
+              linear-gradient(rgb(92,92,88,1) 0 0) border-box;
+          }
+
+          & button:last-of-type {
+            border-top-right-radius: var(--button-border-radius);
+            border-bottom-right-radius: var(--button-border-radius);
+
+            background: 
+              linear-gradient(rgb(9,9,9,1) 0 0) padding-box,
+              linear-gradient(135deg, transparent, rgb(91,79,59,0.75)) border-box,
+              linear-gradient(to right, transparent, rgb(91,79,59,1), transparent, rgb(91,79,59,1)) border-box,
+              linear-gradient(rgb(91,92,87,1) 0 0) border-box;
+          }
+
         }
 
       }
+
+      & .section:hover::before {
+        display: block;
+        content: '';
+        box-sizing: border-box;
+
+        background-color: transparent;
+        border-radius: var(--section-radius);
+        border: 1px solid white;
+        box-shadow: inset 0 0 3px 1px rgb(255, 255, 255, 0.9), 0 0 3px 1px rgb(255, 255, 255, 0.9);
+
+        height: calc(100% - 8px);
+        width: calc(100% - 8px);
+        position: absolute;
+        top: 4px;
+        left: 4px;
+      }
+
+
 
   }
 
