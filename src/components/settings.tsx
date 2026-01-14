@@ -1,10 +1,18 @@
 import {useState, useEffect} from 'react';
 import { DifficultyButtons } from './settings-difficulty';
+import { Chapter, ChapterSelection } from './settings-chapters';
 
 export default function Settings() {
 
   const [show, setShow] = useState<boolean>(false);
   const [difficulty, setDifficulty] = useState<string>("normal");
+
+  // Chapters: Scarlet Blaze
+  const [sbStart, setSbStart] = useState<number>(2);
+  const [sbEnd, setSbEnd] = useState<number>(2);
+  const sbChapters : Chapter[] = [
+    {number: 2}
+  ]
 
   const handleClick_settings = ( () => {
     console.log("Button clicked!")
@@ -47,7 +55,12 @@ export default function Settings() {
                     show={show} 
                     difficulty={difficulty} 
                     setDifficulty={setDifficulty} />
-
+                <ChapterSelection
+                    show={show}
+                    name="Scarlet Blaze"
+                    chapterStart={sbStart} setChapterStart={setSbStart}
+                    chapterEnd={sbEnd} setChapterEnd={setSbEnd}
+                    allChapters={[]}/>
             </div>
 
             <svg height="0" width="0">
