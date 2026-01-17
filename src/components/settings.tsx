@@ -1,8 +1,12 @@
 import {useState, useEffect} from 'react';
 import { DifficultyButtons } from './settings-difficulty';
-import { Chapter, ChapterSelection } from './settings-chapters';
+import { ChapterSelection, RouteChapters } from './settings-chapters';
 
-export default function Settings() {
+interface SettingsProps {
+  allChapters : RouteChapters[];
+}
+
+export default function Settings({allChapters} : SettingsProps) {
 
   const [show, setShow] = useState<boolean>(false);
   const [difficulty, setDifficulty] = useState<string>("normal");
@@ -10,9 +14,6 @@ export default function Settings() {
   // Chapters: Scarlet Blaze
   const [sbStart, setSbStart] = useState<number>(2);
   const [sbEnd, setSbEnd] = useState<number>(2);
-  const sbChapters : Chapter[] = [
-    {number: 2}
-  ]
 
   const handleClick_settings = ( () => {
     console.log("Button clicked!")
@@ -26,7 +27,7 @@ export default function Settings() {
 
   // Run once
   useEffect(() => {
-    console.log(show)
+    console.log("Show:" + show)
   }, [])
 
   useEffect(() => {
@@ -57,10 +58,9 @@ export default function Settings() {
                     setDifficulty={setDifficulty} />
                 <ChapterSelection
                     show={show}
-                    name="Scarlet Blaze"
-                    chapterStart={sbStart} setChapterStart={setSbStart}
-                    chapterEnd={sbEnd} setChapterEnd={setSbEnd}
-                    allChapters={[]}/>
+                    // chapterStart={sbStart} setChapterStart={setSbStart}
+                    // chapterEnd={sbEnd} setChapterEnd={setSbEnd}
+                    allChapters={[allChapters[0], allChapters[1]]}/>
             </div>
 
             <svg height="0" width="0">

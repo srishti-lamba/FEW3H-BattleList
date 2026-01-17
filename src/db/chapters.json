@@ -1,29 +1,71 @@
 [
     {
-        "route": "All",
-        [
-            {"number": 0, "name": "Crossed Roads", "part": 0, "byleth": -1, "final": false},
-            {"number": 1, "name": "A Chance Encounter", "part": 0, "byleth": -1, "final": false},
-            {"number": 2, "name": "Three Houses", "part": 0, "byleth": -1, "final": false},
-            {"number": 15, "name": "The Hour of Vengeance", "part": 2, "byleth": 1, "final": false},
-            {"number": 16, "name": "Into the Chasm", "part": 2, "byleth": 1, "final": false}
-        ]
+      "id": 0,
+      "route": "All",
+      "chapters": [
+        {"number": 0, "name": "Crossed Roads",          "part": 0, "byleth": -1, "final": false},
+        {"number": 1, "name": "A Chance Encounter",     "part": 0, "byleth": -1, "final": false},
+        {"number": 2, "name": "Three Houses",           "part": 0, "byleth": -1, "final": false},
+        {"number": 15, "name": "The Hour of Vengeance", "part": 2, "byleth":  1, "final": false},
+        {"number": 16, "name": "Into the Chasm",        "part": 2, "byleth":  1, "final": false}
+      ]
     },
     {
-        "route": "Scarlet Blaze"
-        {"number": 3,  "name": "The Shadows of Adrestia", "part": 0, "byleth": -1, "final": false},
-        {"number": 4,  "name": "The Struggle Commences", "part": 1, "byleth": -1, "final": false},
-        {"number": 5,  "name": "Skirmish in the Fog", "part": 1, "byleth": -1, "final": false},
-        {"number": 6,  "name": "Bridge of Betrayal", "part": 1, "byleth": -1, "final": false},
-        {"number": 7,  "name": "The Triumph of Valor", "part": 1, "byleth": -1, "final": false},
-        {"number": 8,  "name": "The Maiden's Peril", "part": 1, "byleth": -1, "final": false},
-        {"number": 9,  "name": "Unrest in Enbarr", "part": 1, "byleth": -1, "final": false},
-        {"number": 10, "name": "Shifting History", "part": 2, "byleth": -1, "final": false},
-        {"number": 11, "name": "Heroic Bloodlines", "part": 2, "byleth": -1, "final": false},
-        {"number": 12, "name": "The Rising Darkness", "part": 2, "byleth": -1, "final": false},
-        {"number": 13, "name": "Severing the Past", "part": 2, "byleth": -1, "final": false},
-        {"number": 14, "name": "A Clash of Ambitions", "part": 2, "byleth": 0, "final": false},
-        {"number": 14, "name": "Torment of the Eagle and Lion", "part": 2, "byleth": 1, "final": false},
-        {"number": 15, "name": "A Path Forward", "part": 2, "byleth": -1, "final": true}
+      "id": 1,
+      "route": "Scarlet Blaze",
+      "chapters": [
+        {"number": 3,  "name": "The Shadows of Adrestia",       "part": 0, "byleth": -1, "final": false},
+        {"number": 4,  "name": "The Struggle Commences",        "part": 1, "byleth": -1, "final": false},
+        {"number": 5,  "name": "Skirmish in the Fog",           "part": 1, "byleth": -1, "final": false},
+        {"number": 6,  "name": "Bridge of Betrayal",            "part": 1, "byleth": -1, "final": false},
+        {"number": 7,  "name": "The Triumph of Valor",          "part": 1, "byleth": -1, "final": false},
+        {"number": 8,  "name": "The Maiden's Peril",            "part": 1, "byleth": -1, "final": false},
+        {"number": 9,  "name": "Unrest in Enbarr",              "part": 1, "byleth": -1, "final": false},
+        {"number": 10, "name": "Shifting History",              "part": 2, "byleth": -1, "final": false},
+        {"number": 11, "name": "Heroic Bloodlines",             "part": 2, "byleth": -1, "final": false},
+        {"number": 12, "name": "The Rising Darkness",           "part": 2, "byleth": -1, "final": false},
+        {"number": 13, "name": "Severing the Past",             "part": 2, "byleth": -1, "final": false},
+        {"number": 14, "name": "A Clash of Ambitions",          "part": 2, "byleth":  0, "final": false},
+        {"number": 14, "name": "Torment of the Eagle and Lion", "part": 2, "byleth":  1, "final": false},
+        {"number": -1, "name": "A Path Forward",                "part": 2, "byleth": -1, "final": true}
+      ]
+    },
+    {
+      "id": 2,
+      "route": "Azure Gleam",
+      "chapters": [
+        {"number": 3,  "name": "Crisis in Fhirdiad",           "part": 0, "byleth": -1, "final": false},
+        {"number": 4,  "name": "To War!",                      "part": 1, "byleth": -1, "final": false},
+        {"number": 5,  "name": "Skirmish in the Fog",          "part": 1, "byleth": -1, "final": false},
+        {"number": 6,  "name": "Conspiracy in the Air",        "part": 1, "byleth": -1, "final": false},
+        {"number": 7,  "name": "The King Awakens",             "part": 1, "byleth": -1, "final": false},
+        {"number": 8,  "name": "The Blood-Stained Lance",      "part": 1, "byleth": -1, "final": false},
+        {"number": 9,  "name": "Reunion at the Fortress City", "part": 1, "byleth": -1, "final": false},
+        {"number": 10, "name": "Fanaticism",                   "part": 2, "byleth": -1, "final": false},
+        {"number": 11, "name": "Reprisal",                     "part": 2, "byleth": -1, "final": false},
+        {"number": 12, "name": "A Trick of the Goddess",       "part": 2, "byleth": -1, "final": false},
+        {"number": 13, "name": "Clash of Torment",             "part": 2, "byleth": -1, "final": false},
+        {"number": 14, "name": "The Absent Emperor",           "part": 2, "byleth": -1, "final": false},
+        {"number": -1, "name": "The End of Tragedy",           "part": 2, "byleth": -1, "final": true}
+      ]
+    },
+    {
+      "id": 3,
+      "route": "Golden Wildfire",
+      "chapters": [
+        {"number": 3,  "name": "The Battle for the Locket", "part": 0, "byleth": -1, "final": false},
+        {"number": 4,  "name": "To War!",                   "part": 1, "byleth": -1, "final": false},
+        {"number": 5,  "name": "The Golden Guardian",       "part": 1, "byleth": -1, "final": false},
+        {"number": 6,  "name": "The Leader's Stratagem",    "part": 1, "byleth": -1, "final": false},
+        {"number": 7,  "name": "A Contest of Beasts",       "part": 1, "byleth": -1, "final": false},
+        {"number": 8,  "name": "What Makes a King",         "part": 1, "byleth": -1, "final": false},
+        {"number": 9,  "name": "The End of the Alliance",   "part": 2, "byleth": -1, "final": false},
+        {"number": 10, "name": "Love and Loss",             "part": 2, "byleth": -1, "final": false},
+        {"number": 11, "name": "The Sword Swings Wide",     "part": 2, "byleth": -1, "final": false},
+        {"number": 12, "name": "Two Kings",                 "part": 2, "byleth": -1, "final": false},
+        {"number": 13, "name": "Darkness Attacks",          "part": 2, "byleth": -1, "final": false},
+        {"number": 14, "name": "A Symbol of the Past",      "part": 2, "byleth": -1, "final": false},
+        {"number": -1, "name": "Field of Beginnings",       "part": 2, "byleth": -1, "final": true}
+      ]
     }
 ]
