@@ -4,12 +4,13 @@ import { ChapterSelection, RouteChapters } from './settings-chapters';
 
 interface SettingsProps {
   allChapters : RouteChapters[];
+  difficulty : number;
+  setDifficulty : any;
 }
 
-export default function Settings({allChapters} : SettingsProps) {
+export default function Settings({allChapters, difficulty, setDifficulty} : SettingsProps) {
 
   const [show, setShow] = useState<boolean>(false);
-  const [difficulty, setDifficulty] = useState<string>("normal");
 
   // Chapters: Scarlet Blaze
   const [sbStart, setSbStart] = useState<number>(2);

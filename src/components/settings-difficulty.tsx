@@ -2,7 +2,7 @@ import {useEffect, useRef} from 'react';
 
 interface DifficultyButtonsProps {
   show: boolean;
-  difficulty: string;
+  difficulty: number;
   setDifficulty: any;
 }
 
@@ -35,10 +35,10 @@ export const DifficultyButtons = ({show, difficulty, setDifficulty} : Difficulty
 
         let btn : any = null;
         switch (difficulty) {
-            case "easy":      btn = btnEasy; break;
-            case "normal":    btn = btnNorm; break;
-            case "hard":      btn = btnHard; break;
-            case "maddening": btn = btnMadd; break;
+            case 0: btn = btnEasy; break;
+            case 1: btn = btnNorm; break;
+            case 2: btn = btnHard; break;
+            case 3: btn = btnMadd; break;
         }
         (btn.current as HTMLButtonElement).classList.add("active");
 
@@ -55,29 +55,29 @@ export const DifficultyButtons = ({show, difficulty, setDifficulty} : Difficulty
                 <span className="buttons">
                     <button 
                         ref={btnEasy} 
-                        value="easy"
-                        className={difficulty==="easy" ? "active" : ""}
+                        value={0}
+                        className={difficulty===0 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnEasy)} >
                         Easy
                     </button>
                     <button 
                         ref={btnNorm}
-                        value="normal"
-                        className={difficulty==="normal" ? "active" : ""}
+                        value={1}
+                        className={difficulty===1 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnNorm)} >
                         Normal
                     </button>
                     <button 
                         ref={btnHard} 
-                        value="hard"
-                        className={difficulty==="hard" ? "active" : ""}
+                        value={2}
+                        className={difficulty===2 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnHard)} >
                         Hard
                     </button>
                     <button 
                         ref={btnMadd} 
-                        value="maddening"
-                        className={difficulty==="maddening" ? "active" : ""}
+                        value={3}
+                        className={difficulty===3 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnMadd)} >
                         Maddening
                     </button>
