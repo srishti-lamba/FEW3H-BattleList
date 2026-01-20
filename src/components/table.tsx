@@ -17,9 +17,10 @@ import {
 } from 'material-react-table';
 
 interface Row {
+  id : number;
   route : string;
   chapter : string;
-  level : number;
+  level : number | null;
   mission : string;
 }
 
@@ -33,7 +34,7 @@ interface Mission {
       easy: number,
       normal: number,
       hard: number,
-      maddening: number
+      maddening: number,
     };
     deploy: number,
     territory: string,
@@ -75,7 +76,11 @@ export default function Table( {allMissions, allChapters, difficulty} : TablePro
       if (index == 0)
         return;
 
-      let row : Row = {route:"",chapter:"",level:0,mission:""};
+      let row : Row = {id:0,route:"",chapter:"",level:0,mission:""};
+
+      // ID
+      try { row.id = index; }
+      catch (e: unknown) { caughtError(e); row.id = -1; }
 
       // Route
       try { row.route = allChapters[entry.general.route].route; }
@@ -94,7 +99,13 @@ export default function Table( {allMissions, allChapters, difficulty} : TablePro
           case 0: row.level = entry.general.level.easy; break;
           case 1: row.level = entry.general.level.normal; break;
           case 2: row.level = entry.general.level.hard; break;
-          case 3: row.level = entry.general.level.maddening; break;
+          case 3:
+            if (entry.general.level.maddening == null)
+              row.level =  entry.general.level.normal + 100;
+            else
+              row.level =  entry.general.level.maddening;
+            break;
+             
         }
       }
       catch (e: unknown) { caughtError(e); row.level = 999; }
@@ -113,12 +124,79 @@ export default function Table( {allMissions, allChapters, difficulty} : TablePro
     
   }
 
+  function updateLevels() {
+
+    console.log("Started Update Levels");
+
+    if (data.length == 0)
+      return;
+
+    let rows : Row[] = Array.from(data);
+
+    rows.forEach( (row : Row) => {
+      try { 
+        switch (difficulty) {
+          case 0: row.level = allMissions[row.id].general.level.easy; break;
+          case 1: row.level = allMissions[row.id].general.level.normal; break;
+          case 2: row.level = allMissions[row.id].general.level.hard; break;
+          case 3: 
+            if (allMissions[row.id].general.level.maddening == null)
+              row.level =  allMissions[row.id].general.level.normal + 100;
+            else
+              row.level =  allMissions[row.id].general.level.maddening;
+            break;
+        }
+      }
+      catch (e: unknown) { caughtError(e); row.level = 999; }
+    })
+
+    setData(rows);
+
+  }
+
   const columnHelper = createMRTColumnHelper<Row>();
 
   const columns = [
-  columnHelper.accessor('route', {header: 'Route'}),
-  columnHelper.accessor('chapter', {header: 'Chapter'}),
-  columnHelper.accessor((row : Row) => Number(row.level), {id: "level", header: 'Level'}),
+  columnHelper.accessor(
+    'route', 
+    {
+      header: 'Route',
+      Cell: ( {row} ) => {
+        let src : string = "";
+        switch (row.original.route) {
+          case allChapters[0].route: src = "https://static.wikia.nocookie.net/fireemblem/images/6/64/Resistance_crest.png"; break;
+          case allChapters[1].route: src = "https://static.wikia.nocookie.net/fireemblem/images/0/08/Adrestian_crest.png"; break;
+          case allChapters[2].route: src = "https://static.wikia.nocookie.net/fireemblem/images/a/ac/Faerghus_crest.png"; break;
+          case allChapters[3].route: src = "https://static.wikia.nocookie.net/fireemblem/images/b/b1/Leicester_crest.png"; break;
+        }
+        return(
+          <>
+            <img 
+              alt={row.original.route}
+              src={src}
+             />
+            <span>{row.original.route}</span>
+          </>
+        )
+      }
+    }
+  ),
+  columnHelper.accessor('chapter', 
+    {
+      header: 'Chapter',
+      size: 220,
+    }
+  ),
+  columnHelper.accessor((row : Row) => Number(row.level), 
+    {
+      id: "level", 
+      header: 'Level', 
+      size: 140,
+      muiTableBodyCellProps: {
+        align: 'center',
+      },
+    }
+  ),
   columnHelper.accessor('mission', {header: 'Mission'}),
 ];
 
@@ -128,13 +206,42 @@ const table = useMaterialReactTable({
     enablePagination: false,
     enableBottomToolbar: false,
     enableColumnOrdering: true,
+    enableColumnResizing: true,
     layoutMode: 'grid-no-grow',
+    // muiTableHeadCellProps: {
+    //   sx: {
+    //     '&[data-index="2"]': { //Level
+    //       color: "red",
+    //       "width": "min-content",
+    //       "min-width": "min-content"
+    //     }
+    //   }
+    // },
+    // muiTableBodyCellProps: { // Level
+    //   sx: {
+    //     color: "blue",
+    //     '&.MuiTableRow-root': {
+    //       color: "red",
+    //     }   
+    //     '&[data-index="2"]': {
+    //       color: "red",
+    //       "width": "min-content",
+    //       "min-width": "min-content"
+    //     }
+    //   }
+    //   }
+    // }
+ 
   });
 
   // Run once
   useEffect(() => {
     createData()
   }, [])
+
+  useEffect(() => {
+    updateLevels()
+  }, [difficulty])
 
   function caughtError( e : unknown ) : void {
     if (typeof e === "string") { 

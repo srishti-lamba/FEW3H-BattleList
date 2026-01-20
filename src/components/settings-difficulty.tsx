@@ -15,7 +15,7 @@ export const DifficultyButtons = ({show, difficulty, setDifficulty} : Difficulty
 
     const handleClick_difficulty = ( (btn : any) => {
         console.log("Difficulty clicked!")
-        setDifficulty(btn.current.value);
+        setDifficulty(Number(btn.current.value));
     })
 
     // Run once
@@ -56,28 +56,28 @@ export const DifficultyButtons = ({show, difficulty, setDifficulty} : Difficulty
                     <button 
                         ref={btnEasy} 
                         value={0}
-                        className={difficulty===0 ? "active" : ""}
+                        className={difficulty==0 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnEasy)} >
                         Easy
                     </button>
                     <button 
                         ref={btnNorm}
                         value={1}
-                        className={difficulty===1 ? "active" : ""}
+                        className={difficulty==1 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnNorm)} >
                         Normal
                     </button>
                     <button 
                         ref={btnHard} 
                         value={2}
-                        className={difficulty===2 ? "active" : ""}
+                        className={difficulty==2 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnHard)} >
                         Hard
                     </button>
                     <button 
                         ref={btnMadd} 
                         value={3}
-                        className={difficulty===3 ? "active" : ""}
+                        className={difficulty==3 ? "active" : ""}
                         onClick={() => handleClick_difficulty(btnMadd)} >
                         Maddening
                     </button>
