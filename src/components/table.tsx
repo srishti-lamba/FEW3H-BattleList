@@ -7,8 +7,9 @@
 // 6: Report! (Yellow)
 // 7: Warning!
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, ReactNode} from 'react';
 import { RouteChapters, Chapter } from './settings-chapters';
+import { Container, createRoot } from 'react-dom/client';
 
 import {
   MaterialReactTable,
@@ -64,6 +65,7 @@ interface TableProps {
 export default function Table( {allMissions, allChapters, difficulty} : TableProps) {
 
   const [ data, setData ] = useState<Row[]>([])
+  const [ findDom, setFindDom ] = useState<boolean>(false)
   
   function createData() : void {
     console.log("Starting Create Data");
@@ -250,7 +252,42 @@ const table = useMaterialReactTable({
   // Run once
   useEffect(() => {
     createData()
+    setFindDom(true)
   }, [])
+
+  // useEffect(() => {
+  //   let allRows : NodeListOf<Element> = document.querySelectorAll('table.MuiTable-root tbody.MuiTableBody-root tr.MuiTableRow-root');
+  //   // let query = Array.prototype.map(allRows);
+  //   allRows.forEach( (element : Element) => {
+  //     // console.log(element.parentNode?.appendChild(React.createElement(type: "div", children: element)));
+  //     // let root = createRoot(element);
+  //     // console.log(root)
+  //     const domNode = document.createElement('div');
+  //     domNode.classList.add("table-row-wrapper")
+  //     const root = createRoot(domNode); 
+  //     root.render(
+  //       <div>{(element as unknown) as ReactNode}</div>
+  //     );
+  //     try {
+  //       ((element as unknown) as Node).parentElement!.appendChild(domNode); // You can add it anywhere in the document
+  //     }
+  //     catch (e: unknown) { caughtError(e); }
+  //     // root.render(
+  //     //   <div className="table-row-wrapper">
+  //     //     {(element as unknown) as ReactNode}
+  //     //   </div>
+  //     // )
+  //     // console.log()
+
+  //     // let parentDiv = React.createElement(
+  //     //   "div",
+  //     //   {className: "table-row-wrapper"},
+  //     //   (element as ReactNode)
+  //     // )
+  //     // console.log(((element as unknown) as Node).parentElement?.appendChild(parentDiv as ReactNode));
+  //   })
+  //   // console.log(query);
+  // }, [findDom])
 
   useEffect(() => {
     updateLevels()
