@@ -164,21 +164,52 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          & > img {
+          height: min-content;
+          position: relative;
+          & > span.chapter-selection-arrow-wrapper {
             height: 1em;
-            z-index: 1;
             padding: var(--image-padding);
-            &:hover {
-              background-color: rgb(123,118,123,1);
+            position: relative;
+            &:hover::after {
+              content: ' ';
+              display: block;
+              position: absolute;
+              background-color: rgb(255, 255, 255);
+              /* clip-path: url(#down-arrow-clip); */
+              /* aspect-ratio: 1; */
+              /* mask-image: url(../public/images/ui-icons/down-arrow-mask2.png); */
+              mask-image: url(../public/images/ui-icons/down-arrow-mask.svg);
+              mask-repeat: no-repeat;
+              mask-clip: padding-box;
+              mask-size: calc(100% - var(--image-padding));
+              mask-position: center;
+              /* height: 105%; */
+              aspect-ratio: 1;
+              width: 80%;
+              z-index: 200;
+              top: -10%;
+              left: 9%;
+              filter: blur(5px);
             }
-          }
-          & > img.chapter-selection-up-arrow {
-            -webkit-transform: scaleY(-1);
-            transform: scaleY(-1);
-            margin-bottom: calc(var(--option-padding)*0.5);
-          }
-          & > img.chapter-selection-down-arrow {
-            margin-top: calc(var(--option-padding)*0.5);
+            &:has(img.chapter-selection-up-arrow):hover::after {
+                -webkit-transform: scaleY(-1);
+                transform: scaleY(-1);
+                /* bottom: 0.5%; */
+                /* top: -27%; */
+              }
+            & > img {
+              height: 100%;
+              z-index: 0;
+              position: relative;
+            }
+            & > img.chapter-selection-up-arrow {
+              -webkit-transform: scaleY(-1);
+              transform: scaleY(-1);
+              /* margin-bottom: calc(var(--option-padding)*0.5); */
+            }
+            & > img.chapter-selection-down-arrow {
+              /* margin-top: calc(var(--option-padding)*0.5); */
+            }
           }
           & > div.chapter-selection-dropdown {
             & > div:nth-child(4) {

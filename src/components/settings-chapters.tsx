@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import Select, {Props, GroupBase, OptionsOrGroups, StylesConfig } from 'react-select';
+import { optionCSS } from 'react-select/dist/declarations/src/components/Option';
 
 export interface Chapter {
   number: number;
@@ -19,6 +20,7 @@ interface SelectOption {
   value: number[];
   chapter: number;
   name: string;
+  prefix?: string;
 }
 
 interface PrologueOption extends SelectOption {};
@@ -135,48 +137,26 @@ export function ChapterSelection({show, /*chapterStart, setChapterStart, chapter
         }
         // Not Recruited
         else if (curCh.byleth == 0) {
-          notRecruitedOptions.push({value:[routeID,rCh], chapter:curCh.number, name:curCh.name})
+          notRecruitedOptions.push({value:[routeID,rCh], chapter:curCh.number, name:curCh.name, prefix:"└"})
         }
         // Recruited
         else if (curCh.byleth == 1) {
-          recruitedOptions.push({value:[routeID,rCh], chapter:curCh.number, name:curCh.name})
+          recruitedOptions.push({value:[routeID,rCh], chapter:curCh.number, name:curCh.name, prefix:"├"})
         }
         rCh += 1;
         curCh = rChs[rCh]
       }
+
+      // Route : Part 2: Recruited-Only chapters
+      curCh = pChs[pCh]
+      while ((pCh < pChs.length) && (curCh.part == 2) && (curCh.byleth == 1)) {
+        recruitedOptions.push({value:[routeID,rCh], chapter:curCh.number, name:curCh.name, prefix:"├"})
+        pCh += 1;
+        curCh = pChs[pCh]
+      }
+      recruitedOptions[recruitedOptions.length-1].prefix = "└"
+
     }
-
-  //   const partTwoOptionsGroup = [
-  //   {
-  //     options: partTwoOptions
-  //   },
-  //   {
-  //     label: "Not Recruited",
-  //     options: notRecruitedOptions
-  //   },
-  //   {
-  //     label: "Recruited",
-  //     options: recruitedOptions
-  //   },
-  //   {
-  //     options: finalChapterOption
-  //   }
-  // ]
-
-  // const groupedOptions = [
-  //   {
-  //     label: "Prologue",
-  //     options: prologueOptions
-  //   },
-  //   {
-  //     label : "Part One",
-  //     options: partOneOptions
-  //   },
-  //   {
-  //     label: "Part Two",
-  //     options: partTwoOptionsGroup
-  //   }
-  // ]
 
   let groupedOptions : GroupedOption[] = [
     {
@@ -208,10 +188,7 @@ export function ChapterSelection({show, /*chapterStart, setChapterStart, chapter
     console.log(groupedOptions);
     setAllOptions(groupedOptions);
     setSelectedOption(groupedOptions[0].options[0])
-    // allOptions = groupedOptions;
-    // groupedOptions.forEach(x=>allOptions.push(x))
-    // allOptions.push()
-    // return groupedOptions;
+
   }
 
   // ------------------------
@@ -223,65 +200,10 @@ export function ChapterSelection({show, /*chapterStart, setChapterStart, chapter
     console.log(event);
   }
 
-  // const colourStyles : StylesConfig = {
-  //   control: (styles: any) => ({ ...styles, backgroundColor: 'white' }),
-  //   option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
-  //     // const color = chroma(data.color);
-  //     return {
-  //       ...styles,
-  //       backgroundColor: isSelected ? 'red' : 'blue',
-  //       color: '#FFF',
-  //       cursor: isDisabled ? 'not-allowed' : 'default',
-  //     };
-  //   }
-  // };
-
   // Run once
   useEffect(() => {
     createSelectOptions();
   }, [])
-
-  // createSelectOptions();
-
-//   function CustomSelect<
-//     Option,
-//     IsMulti extends boolean = false,
-//     Group extends GroupBase<Option> = GroupBase<Option>
-//   >(props: Props<Option, IsMulti, Group>) {
-//     return (
-//       <Select {...props} theme={(theme) => ({ ...theme, borderRadius: 0 })} />
-//     );
-//   }
-
-  // useEffect(() => {
-
-  //     console.log("Difficulty changed: " + difficulty)
-
-  //     if (btnEasy.current == null) {
-  //         return
-  //     }
-
-  //     let arr : any[] = [btnEasy, btnNorm, btnHard, btnMadd]
-  //     arr.map( (b) => {(b.current as HTMLButtonElement).classList.remove("active");})
-
-  //     let btn : any = null;
-  //     switch (difficulty) {
-  //         case "easy":      btn = btnEasy; break;
-  //         case "normal":    btn = btnNorm; break;
-  //         case "hard":      btn = btnHard; break;
-  //         case "maddening": btn = btnMadd; break;
-  //     }
-  //     (btn.current as HTMLButtonElement).classList.add("active");
-
-  // }, [difficulty])
-
-  // ---------------------
-  // --- Type Checking ---
-  // ---------------------
-
-  function isSelectOption(object: any): object is SelectOption {
-    return 'id' in object;
-}
 
   if (!show) {
     return <></>;
@@ -292,49 +214,50 @@ export function ChapterSelection({show, /*chapterStart, setChapterStart, chapter
       <span className="section chapter-selection">
         <span className="prompt">{allChapters[1].route}</span>
         <span className="chapter-selection-wrapper">
-          <img 
-            className="chapter-selection-up-arrow"
-            src={process.env.PUBLIC_URL + "/images/ui-icons/down-arrow.png"}
-          />
+          <span className="chapter-selection-arrow-wrapper">
+            <img 
+              className="chapter-selection-up-arrow"
+              src={process.env.PUBLIC_URL + "/images/ui-icons/down-arrow.png"}
+            />
+          </span>
           <Select 
             className="chapter-selection-dropdown"
-            // ref={selectStart} 
-            // Option={createSelectOptions()}
-            // {...customSelectProps}
-            // options = {createSelectOptions()}
             options = {allOptions}
             isClearable = {false}
             onChange={handleChange_select}
             value={selectedOption}
-              // allOptions.filter((option) => 
-              // option.options[] === 'Some label')
             // menuIsOpen={true}
             formatOptionLabel={(opt : unknown, { context }) => {
               let option : SelectOption = (opt as SelectOption)
               if (option.chapter == -1)
                 return context === "menu" ? "Final chapter" : "Final";
-              else if (option.value[0] == 1 && (option.value[1] == 11 || option.value[1] == 12))
-                return context === "menu" ? "└ Chapter " + option.chapter : option.chapter;
+              else if (option.prefix != undefined)
+                return context === "menu" ? option.prefix + " Chapter " + option.chapter : option.chapter;
               else
                 return context === "menu" ? "Chapter " + option.chapter : option.chapter;
               }
             }
-            // styles={colourStyles}
-            // styles={{
-            //   control: (baseStyles, state) => ({
-            //     ...baseStyles,
-            //     borderColor: state.isSelected ? 'grey' : 'red',
-            //   }),
-            //   options: ()
-            // }}
           />
-          <img 
-            className="chapter-selection-down-arrow"
-            src={process.env.PUBLIC_URL + "/images/ui-icons/down-arrow.png"}
-          />
+          <span className="chapter-selection-arrow-wrapper">
+            <img 
+              className="chapter-selection-down-arrow"
+              src={process.env.PUBLIC_URL + "/images/ui-icons/down-arrow.png"}
+            />
+          </span>
          
           </span>
       </span>
+      <svg height="0" width="0">
+        <defs>
+            <clipPath id="down-arrow-clip"  clipPathUnits="objectBoundingBox" preserveAspectRatio="xMidYMid meet">
+              <path d="M 0.025 0.075 L 0.475 0.575 
+              Q 0.5 0.6 0.525 0.575 L 0.975 0.075 
+              Q 1.01 0.02 0.95 0.025 L 0.525 0.1125 
+              Q 0.5 0.1175 0.475 0.1125 L 0.05 0.025 
+              Q -0.01 0.02 0.025 0.075"/>
+            </clipPath>
+        </defs>
+      </svg>
     </>
   )
 }
