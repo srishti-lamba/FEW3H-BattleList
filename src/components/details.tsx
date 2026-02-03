@@ -9,6 +9,9 @@ interface DetailsProps {
 export function Details( {selectedRow} : DetailsProps ) {
 
     return (
-        <Map selectedRow={selectedRow}/>
+        <>
+            <Map selectedRow={selectedRow}/>
+            <img src={process.env.PUBLIC_URL + "/images/ui-background/test.svg"} width="100%" height="100px" />
+        </>
     )
 }

@@ -197,15 +197,11 @@
               display: block;
               position: absolute;
               background-color: rgb(255, 255, 255);
-              /* clip-path: url(#down-arrow-clip); */
-              /* aspect-ratio: 1; */
-              /* mask-image: url(../public/images/ui-icons/down-arrow-mask2.png); */
               mask-image: url(../public/images/ui-icons/down-arrow-mask.svg);
               mask-repeat: no-repeat;
               mask-clip: padding-box;
               mask-size: calc(100% - var(--image-padding));
               mask-position: center;
-              /* height: 105%; */
               aspect-ratio: 1;
               width: 80%;
               z-index: 200;
@@ -400,9 +396,15 @@
         transition: background-color 0ms;
         height: 3em;
       	aspect-ratio: 8.222;
-      	clip-path: var(--row-clip-path);
+      	/* clip-path: var(--row-clip-path); */
         overflow:visible;
         z-index: 1;
+
+        mask-image: var(--row-clip-path);
+        mask-repeat: no-repeat;
+        mask-clip: padding-box;
+        mask-size: 100%;
+        mask-position: center;
 
         &:before {
           all: unset;
@@ -461,6 +463,21 @@
 
             &:after {
               background-color: transparent !important;
+            }
+          }
+        }
+
+        &:hover {
+          & > td.MuiTableCell-root:first-child {
+            overflow: visible;
+            &::before {
+              content: ' ';
+              position: absolute;
+              height: 30px;
+              width: 30px;
+              left: -30px;
+              background-color: red;
+              
             }
           }
         }
