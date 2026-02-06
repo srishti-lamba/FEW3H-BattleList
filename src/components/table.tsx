@@ -303,8 +303,8 @@ const table = useMaterialReactTable({
   }
 
   return (
-    <>
+    <div id="left-pane-contents">
       <MaterialReactTable table={table} />
-    </>
+    </div>
   )
 }

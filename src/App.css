@@ -9,16 +9,31 @@
   height: 100vh;
 
   & > div.split-pane {
+    --divider-width: 5px;
+    --divider-margin: var(--divider-width);
+    --divider-half: calc( var(--divider-width) + (var(--divider-margin)*2)/2);
     flex: 1;
 
-    & > div[role="separator"] {
-      width: 5px !important;
+    & > div.split-pane-divider.horizontal:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      width: var(--divider-width) !important;
+      height: calc(100% - var(--divider-margin));
       background-color: rgb(220, 220, 220);
-      margin: 5px;
       border-radius: 5px;
+      transform: translate( calc(-50% + 1px),0);
       &:hover {
         background-color: rgb(185, 185, 185);
       }
+    }
+
+    & #left-pane-contents {
+      padding-right: var(--divider-half);
+    }
+
+    & #right-pane-contents {
+      padding-left: var(--divider-half);
     }
 
     & svg {
@@ -396,15 +411,15 @@
         transition: background-color 0ms;
         height: 3em;
       	aspect-ratio: 8.222;
-      	/* clip-path: var(--row-clip-path); */
+      	clip-path: var(--row-clip-path);
         overflow:visible;
         z-index: 1;
 
-        mask-image: var(--row-clip-path);
+        /* mask-image: var(--row-clip-path);
         mask-repeat: no-repeat;
         mask-clip: padding-box;
         mask-size: 100%;
-        mask-position: center;
+        mask-position: center; */
 
         &:before {
           all: unset;
@@ -539,5 +554,36 @@
     }
 
   }
+
+}
+
+.test {
+  --height : 3em;
+
+  height: var(--height);
+  width: 100%;
+  background-color: whitesmoke;
+  background-image:
+    url(/public/images/ui-background/missionRow/inner-main-left-edge.svg),
+    url(/public/images/ui-background/missionRow/outer-left-edge.svg),
+    url(/public/images/ui-background/missionRow/outer-right-edge.svg),
+    linear-gradient(
+      90deg, 
+      transparent calc(var(--height) * 0.171428571), 
+      rgb(98,8,8) calc(var(--height) * 0.171428571),
+      rgb(200,25,10) 50%,
+      rgb(98,8,8) calc(100% + ((var(--height) * -0.171428571))),
+      /* orange calc(var(--height) * 0.171428571), 
+      orange calc(100% + ((var(--height) * -0.171428571))),  */
+      transparent calc(100% + ((var(--height) * -0.171428571))))
+  ;
+  background-repeat: 
+    no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position:
+    left, left, right, center;
+  background-size: auto, auto;
+  /* background-image:
+    url(/public/images/ui-background/test.svg)
+  ; */
 
 }
