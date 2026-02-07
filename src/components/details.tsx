@@ -12,6 +12,7 @@ export function Details( {selectedRow} : DetailsProps ) {
         <div id="right-pane-contents">
             <Map selectedRow={selectedRow}/>
             <div className="test"></div>
+            <div className="test2"></div>
             {/* <img src={process.env.PUBLIC_URL + "/images/ui-background/test.svg"} width="100%" height="100px" /> */}
         </div>
     )

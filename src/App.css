@@ -564,7 +564,9 @@
   width: 100%;
   background-color: whitesmoke;
   background-image:
-    url(/public/images/ui-background/missionRow/inner-main-left-edge.svg),
+    url(/public/images/ui-background/missionRow/inner-side-left-edge.svg),
+    url(/public/images/ui-background/missionRow/inner-side-right-edge.svg),
+    url(/public/images/ui-background/missionRow/inner-side-middle.svg),
     url(/public/images/ui-background/missionRow/outer-left-edge.svg),
     url(/public/images/ui-background/missionRow/outer-right-edge.svg),
     linear-gradient(
@@ -578,12 +580,40 @@
       transparent calc(100% + ((var(--height) * -0.171428571))))
   ;
   background-repeat: 
-    no-repeat, no-repeat, no-repeat, no-repeat;
+    no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   background-position:
-    left, left, right, center;
-  background-size: auto, auto;
+    left, right, center, left, right, center;
+  background-size: auto, auto, calc(100% - 3.5em + 2px), auto;
   /* background-image:
     url(/public/images/ui-background/test.svg)
   ; */
 
+}
+
+.test2 {
+  --height : 3em;
+
+  margin-top: 1em;
+
+  height: var(--height);
+  width: 100%;
+  background-color: whitesmoke;
+  background-image:
+    url(/public/images/ui-background/missionRow/inner-main-left-edge.svg),
+    url(/public/images/ui-background/missionRow/outer-left-edge.svg),
+    url(/public/images/ui-background/missionRow/outer-right-edge.svg),
+    linear-gradient(
+      90deg, 
+      transparent calc(var(--height) * 0.171428571), 
+      rgb(98,8,8) calc(var(--height) * 0.171428571),
+      rgb(200,25,10) 50%,
+      rgb(98,8,8) calc(100% + ((var(--height) * -0.171428571))),
+      transparent calc(100% + ((var(--height) * -0.171428571))))
+  ;
+
+  background-repeat: 
+    no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position:
+    left, left, right, center;
+  background-size: auto, auto, auto, auto;
 }
