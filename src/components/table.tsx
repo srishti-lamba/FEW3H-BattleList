@@ -23,6 +23,7 @@ interface Row {
   chapter : string;
   level : number | undefined;
   mission : string;
+  type: number;
 }
 
 interface Mission {
@@ -80,7 +81,7 @@ export default function Table( {allMissions, allChapters, difficulty, selectedRo
       if (index == 0)
         return;
 
-      let row : Row = {id:0,route:"",chapter:"",level:0,mission:""};
+      let row : Row = {id:0,route:"",chapter:"",level:0,mission:"",type:0};
 
       // ID
       try { row.id = index; }
@@ -117,6 +118,10 @@ export default function Table( {allMissions, allChapters, difficulty, selectedRo
       // Mission
       try { row.mission = entry.general.name }
       catch (e: unknown) { caughtError(e); row.mission = "-"; }
+
+      // Type
+      try { row.type = entry.general.type }
+      catch (e: unknown) { caughtError(e); row.type = 0; }
 
       rows.push(row);
 
@@ -245,6 +250,7 @@ const table = useMaterialReactTable({
           [row.id]: !prev[row.id],
         })}),
       selected: selectedRow[row.id],
+      className: row.original.type == 0 ? "side-mission" : "main-mission",
       sx: {
         cursor: 'pointer',
       },

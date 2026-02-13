@@ -599,9 +599,9 @@
   width: 100%;
   background-color: whitesmoke;
   background-image:
-    url(/public/images/ui-background/missionRow/inner-main-left-edge.svg),
-    url(/public/images/ui-background/missionRow/outer-right-edge.svg),
-    url(/public/images/ui-background/missionRow/inner-main-middle.svg)
+    url(/public/images/ui-background/missionRow/main-left.svg),
+    url(/public/images/ui-background/missionRow/main-right.svg),
+    url(/public/images/ui-background/missionRow/main-middle.svg)
     /* linear-gradient(
       90deg, 
       transparent calc(var(--height) * 0.171428571), 
@@ -615,5 +615,5 @@
     no-repeat, no-repeat, no-repeat, no-repeat;
   background-position:
     left, right, center;
-  background-size: auto, auto, calc(100% - ((var(--height) * 0.171428571)*2)) auto;
+  background-size: auto, auto, calc(100% - ((var(--height) * 0.54285714285)*2) + 2px) 100%;
 }
