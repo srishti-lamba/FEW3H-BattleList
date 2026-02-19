@@ -34,12 +34,49 @@
 
     & #right-pane-contents {
       padding-left: var(--divider-half);
-    }
 
-    & svg {
-      width: 100% !important;
-    }
+      container: rightPane / inline-size;
 
+      & .map-container {
+
+        & svg {
+          width: 100% !important;
+          position: absolute;
+          z-index: 0;
+        }
+
+        & .map-grid-container {
+          display: flex;
+          flex-flow: column nowrap;
+
+          & .map-grid-row-container {
+            --border : 1px solid rgb(50, 25, 0, 0.5);
+
+            display: flex;
+            flex-flow: row nowrap;
+  
+            &:last-child > .map-grid-cell-container {
+              border-bottom: var(--border);
+            }
+
+            & .map-grid-cell-container {
+              display: block;
+              z-index: 1;
+              width: 100%;
+              aspect-ratio: 1;
+              
+              border-top: var(--border);
+              border-left: var(--border);
+
+              &:last-child {
+                border-right: var(--border);
+              }
+            }
+          }
+        }
+      }
+
+    }
   }
 }
 
@@ -625,6 +662,14 @@
 
 .test2 {
   --height : 3.55em;
+  --pattern-width: 150px;
+  --diamond-size: 0px;
+  
+  
+  /* container: mission-row / inline-size; */
+  /* container: mission-row / size; */
+  container-type: inline-size;
+
 
   margin-top: 1em;
 
@@ -640,7 +685,32 @@
     no-repeat, no-repeat, no-repeat, no-repeat;
   background-position:
     left, right, center, center;
-  background-size: auto, auto, calc(100% - ((var(--height) * 3.77142857143)*2) + 2px) 100%, calc(100% - ((var(--height) * 0.54285714285)*2) + 2px) 100%;
+  background-size: 
+    auto, 
+    auto, 
+    var(--diamond-size),
+    calc(100% - ((var(--height) * 0.54285714285)*2) + 2px) 100%;
+
+  /* One Diamond */
+  @container rightPane (width > calc(100px + ((3.55em * 3.77142857143)*2) + 23px)) { &{
+      --diamond-size: var(--pattern-width);
+  } }
+  /* Three Diamonds */
+  @container rightPane (width > calc(100px + ((3.55em * 3.77142857143)*2) + (23px + (300px * 1)))) { &{
+      --diamond-size: calc( var(--pattern-width) * 3);
+  } }
+  /* Five Diamonds */
+  @container rightPane (width > calc(100px + ((3.55em * 3.77142857143)*2) + (23px + (300px * 2)))) { &{
+      --diamond-size: calc( var(--pattern-width) * 5);
+  } }
+  /* Seven Diamonds */
+  @container rightPane (width > calc(100px + ((3.55em * 3.77142857143)*2) + (23px + (300px * 3)))) { &{
+      --diamond-size: calc( var(--pattern-width) * 7);
+  } }
+  /* Nine Diamonds */
+  @container rightPane (width > calc(100px + ((3.55em * 3.77142857143)*2) + (23px + (300px * 4)))) { &{
+      --diamond-size: calc( var(--pattern-width) * 9);
+  } }
 
   &:hover {
     background-image:
@@ -651,3 +721,22 @@
   }
 
 }
+
+/* @container mission-row (width < calc(150px - ((var(--height) * 3.77142857143) * 2) + 2px - 100px)) { */
+/* @container mission-row (min-width < 500px) {
+  .App {
+    background-color: red !important;
+  }
+} */
+
+/* @container rightPane (width > 500px) {
+  .test2 {
+    background-color: blue !important;
+  }
+} */
+
+/* @container (max-width > 100px) {
+  .App {
+    background-color: blue !important;
+  }
+} */

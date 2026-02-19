@@ -40,9 +40,18 @@ interface svg_PathType {
     gates : svg_GateType[];
 }
 
+interface size_SpecificType {
+    width: number;
+    height: number;
+}
+
+interface size_CategoryType {
+    pixels : size_SpecificType;
+    squares : size_SpecificType;
+}
+
 interface SvgPropsType {
-    width : string;
-    height : string;
+    size : size_CategoryType;
     paths : svg_PathType;
 }
 
@@ -97,39 +106,74 @@ export function Map({selectedRow} : MapProps) {
         return <>Select a chapter.</>;
     }
 
+    const createGridContainer = () => {
+        var rows = [];
+
+        for (let row : number = 1 ; row <= svgProps.size.squares.height ; row++ ) {
+            var cells = []
+            for (let col : number = 1 ; col <= svgProps.size.squares.width ; col++) {
+                cells.push(
+                    <div
+                        className="map-grid-cell-container"
+                        data-row = {row}
+                        data-col = {col}
+                        key={"mapGridCell-" + row + "-" + col}
+                    ></div>
+                )
+            }
+
+            rows.push(
+                <div 
+                    className="map-grid-row-container"
+                    key={"mapGridRow-" + row}
+                >
+                    {cells}
+                </div>
+            )   
+        }
+        return rows;
+    }
+
     return (
-        <svg 
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox={"0 0 " + svgProps.width + " " + svgProps.height}
-        >
-            {/* Full */}
-            <path 
-                fill={fills.base} 
-                transform={svgProps.paths.full.transform} 
-                d={svgProps.paths.full.d} 
-            />
-            {
-                // Strongholds
-                svgProps.paths.strongholds.map( (path : svg_StrongholdType) => (
-                    <path 
-                        fill={(path.fill !== undefined) ? path.fill : fills.strongholdRed} 
-                        transform={path.transform} 
-                        d={path.d} 
-                    />
-                ))
-            }
-            {
-                // Gates
-                svgProps.paths.gates.map( (path : svg_GateType) => (
-                    <path 
-                        fill={(path.fill !== undefined) ? path.fill : fills.gate} 
-                        transform={path.transform} 
-                        d={path.d} 
-                    />
-                ))
-            }
-        </svg>
+        <div className="map-container">
+            <svg 
+                version="1.1" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox={"0 0 " + svgProps.size.pixels.width + " " + svgProps.size.pixels.height}
+            >
+                {/* Full */}
+                <path 
+                    fill={fills.base} 
+                    transform={svgProps.paths.full.transform} 
+                    d={svgProps.paths.full.d} 
+                />
+                {
+                    // Strongholds
+                    svgProps.paths.strongholds.map( (path : svg_StrongholdType, index : number) => (
+                        <path 
+                            fill={(path.fill !== undefined) ? path.fill : fills.strongholdRed} 
+                            transform={path.transform} 
+                            d={path.d}
+                            key={"mapStronghold-" + index}
+                        />
+                    ))
+                }
+                {
+                    // Gates
+                    svgProps.paths.gates.map( (path : svg_GateType, index : number) => (
+                        <path 
+                            fill={(path.fill !== undefined) ? path.fill : fills.gate} 
+                            transform={path.transform} 
+                            d={path.d}
+                            key={"mapGate-" + index}
+                        />
+                    ))
+                }
+            </svg>
+            <div className="map-grid-container" >
+                {createGridContainer()}
+            </div>
+        </div>
     )
     
 }

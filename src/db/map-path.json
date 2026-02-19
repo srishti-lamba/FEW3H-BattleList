@@ -1,7 +1,15 @@
 [
     {
-        "width" : "3070",
-        "height" : "3070",
+        "size" : {
+            "pixels" : {
+                "width" : 3070,
+                "height" : 3070
+            },
+            "squares" : {
+                "width" : 64,
+                "height" : 64
+            }
+        },
         "paths" : {
             "full": {
                 "transform" : "translate(1774.3033180236816,169.38476085662842)",

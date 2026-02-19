@@ -32,7 +32,7 @@ function App() {
       />
 
       <SplitPane direction="horizontal" resizable={true}>
-        <Pane minSize="200px" defaultSize="70%">
+        <Pane minSize="200px" defaultSize="30%">
           <Table
             allMissions={allMissions}
             allChapters={allChapters}
